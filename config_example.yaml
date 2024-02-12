@@ -1,0 +1,89 @@
+# Cloud Automation Toolkit - Example Configuration
+# Copy to config.yaml and fill in real values.
+# config.yaml is excluded from version control via .gitignore.
+
+# ─── VMware vSphere ───────────────────────────────────────────────
+vmware:
+  vcenter_host: "${VCENTER_HOST}"        # e.g. vcenter.example.com
+  vcenter_port: 443
+  username: "${VCENTER_USER}"
+  password: "${VCENTER_PASSWORD}"
+  verify_ssl: true
+  datacenters:                           # leave empty to scan all
+    - "DC-Primary"
+    - "DC-Secondary"
+
+# ─── GCP ──────────────────────────────────────────────────────────
+gcp:
+  billing_project: "${GCP_BILLING_PROJECT}"
+  billing_dataset: "${GCP_BILLING_DATASET}"  # e.g. billing_export
+  billing_table: "${GCP_BILLING_TABLE}"      # e.g. gcp_billing_export_v1
+  projects:
+    - "my-project-dev"
+    - "my-project-staging"
+    - "my-project-prod"
+  regions:
+    - "us-central1"
+    - "us-east1"
+    - "europe-west1"
+
+# ─── AWS ──────────────────────────────────────────────────────────
+aws:
+  profile: "${AWS_PROFILE}"              # AWS CLI named profile
+  regions:
+    - "us-east-1"
+    - "us-west-2"
+    - "eu-west-1"
+
+# ─── Health Checks ────────────────────────────────────────────────
+health_checks:
+  dns:
+    - hostname: "api.example.com"
+      expected_ip: "203.0.113.10"
+    - hostname: "cdn.example.com"
+  http:
+    - url: "https://api.example.com/health"
+      expected_status: 200
+      timeout_seconds: 10
+    - url: "https://app.example.com/"
+      expected_status: 200
+      timeout_seconds: 10
+  ssl:
+    - hostname: "api.example.com"
+      port: 443
+      warn_days: 30
+    - hostname: "app.example.com"
+      port: 443
+      warn_days: 30
+
+# ─── Tag Compliance Policy ────────────────────────────────────────
+tagging:
+  required_tags:
+    - "environment"
+    - "owner"
+    - "cost-center"
+    - "application"
+  default_values:
+    environment: "unknown"
+    owner: "unassigned"
+  resource_types:
+    aws:
+      - "ec2:instance"
+      - "ec2:volume"
+      - "s3:bucket"
+      - "rds:db"
+    gcp:
+      - "compute.instances"
+      - "storage.buckets"
+      - "sql.instances"
+
+# ─── Ansible Inventory ────────────────────────────────────────────
+ansible:
+  group_by:
+    - "environment"
+    - "role"
+    - "region"
+  ssh_user: "deploy"
+  ssh_key_path: "~/.ssh/id_ed25519"
+  host_vars:
+    ansible_python_interpreter: "/usr/bin/python3"

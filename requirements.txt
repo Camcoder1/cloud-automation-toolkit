@@ -1,0 +1,24 @@
+# Cloud provider SDKs
+google-cloud-bigquery>=3.11.0
+google-cloud-compute>=1.14.0
+google-cloud-resource-manager>=1.10.0
+boto3>=1.28.0
+
+# VMware
+pyvmomi>=8.0.1
+
+# Infrastructure & utilities
+requests>=2.31.0
+pyyaml>=6.0.1
+cryptography>=41.0.0
+dnspython>=2.4.0
+
+# CLI & output
+rich>=13.5.0
+tabulate>=0.9.0
+
+# Development
+ruff>=0.1.0
+black>=23.7.0
+pytest>=7.4.0
+mypy>=1.5.0

@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Config with real values
+config.yaml
+config.yml
+*.local.yaml
+*.local.yml
+
+# Credentials
+*.pem
+*.key
+*.crt
+service-account*.json
+credentials*.json
+.env
+.env.*
+
+# Output files
+*.csv
+*.json
+!config_example.yaml
+!package.json
+
+# Logs
+*.log
+logs/
+
+# Test
+.pytest_cache/
+.mypy_cache/
+htmlcov/
+.coverage
